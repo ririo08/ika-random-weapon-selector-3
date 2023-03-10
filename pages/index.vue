@@ -2,11 +2,13 @@
 import { Weapon } from '~/@types/Weapon';
 import weapons from '~/src/weapon.json';
 
-const selectedWeapon = useState<Weapon>('selectedWeapon', () => ({
+const weaponList = ref<Weapon[]>(weapons);
+
+const selectedWeapon = ref<Weapon>({
   category: '',
   name: '',
   filename: '',
-}));
+});
 
 const onbuttonClick = () => {
   const landomNumber = Math.floor(Math.random() * weapons.length);
@@ -26,18 +28,20 @@ const onbuttonClick = () => {
       <p><img :src="`images/${selectedWeapon.filename}`" alt="" /></p>
     </div>
     <table>
-      <tr>
-        <th>カテゴリ</th>
-        <th>ブキ名</th>
-        <th>ファイル名</th>
-        <th>画像</th>
-      </tr>
-      <tr v-for="weapon in weapons">
-        <td>{{ weapon.category }}</td>
-        <td>{{ weapon.name }}</td>
-        <td>{{ weapon.filename }}</td>
-        <td><img :src="`images/${weapon.filename}`" alt="" /></td>
-      </tr>
+      <tbody>
+        <tr>
+          <th>カテゴリ</th>
+          <th>ブキ名</th>
+          <th>ファイル名</th>
+          <th>画像</th>
+        </tr>
+        <tr v-for="weapon in weaponList" :key="weapon.name">
+          <td>{{ weapon.category }}</td>
+          <td>{{ weapon.name }}</td>
+          <td>{{ weapon.filename }}</td>
+          <td><img :src="`images/${weapon.filename}`" alt="" /></td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>
