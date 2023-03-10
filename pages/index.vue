@@ -2,7 +2,23 @@
 import { Weapon } from '~/@types/Weapon';
 import weapons from '~/src/weapon.json';
 
+const categories = ref<string[]>([
+  'シューター',
+  'ローラー',
+  'チャージャー',
+  'スロッシャー',
+  'スピナー',
+  'マニューバー',
+  'シェルター',
+  'ブラスター',
+  'フデ',
+  'ストリンガー',
+  'ワイパー',
+]);
+
 const weaponList = ref<Weapon[]>(weapons);
+
+const selectedCategories = ref<string[]>(categories.value);
 
 const selectedWeapon = ref<Weapon>({
   category: '',
@@ -11,9 +27,15 @@ const selectedWeapon = ref<Weapon>({
 });
 
 const onbuttonClick = () => {
-  const landomNumber = Math.floor(Math.random() * weapons.length);
-  selectedWeapon.value = weapons[landomNumber];
-  console.log(selectedWeapon);
+  const landomNumber = Math.floor(Math.random() * weaponList.value.length);
+  selectedWeapon.value = weaponList.value[landomNumber];
+  console.log(selectedWeapon.value);
+};
+
+const onCategoryClick = () => {
+  weaponList.value = weapons.filter((w) =>
+    selectedCategories.value.includes(w.category)
+  );
 };
 </script>
 
@@ -27,21 +49,15 @@ const onbuttonClick = () => {
       <p>画像名：{{ selectedWeapon.filename }}</p>
       <p><img :src="`images/${selectedWeapon.filename}`" alt="" /></p>
     </div>
-    <table>
-      <tbody>
-        <tr>
-          <th>カテゴリ</th>
-          <th>ブキ名</th>
-          <th>ファイル名</th>
-          <th>画像</th>
-        </tr>
-        <tr v-for="weapon in weaponList" :key="weapon.name">
-          <td>{{ weapon.category }}</td>
-          <td>{{ weapon.name }}</td>
-          <td>{{ weapon.filename }}</td>
-          <td><img :src="`images/${weapon.filename}`" alt="" /></td>
-        </tr>
-      </tbody>
-    </table>
+    <div v-for="category in categories" :key="category">
+      <input
+        v-model="selectedCategories"
+        type="checkbox"
+        :id="category"
+        :value="category"
+        @change="onCategoryClick"
+      />
+      <label :for="category">{{ category }}</label>
+    </div>
   </div>
 </template>
