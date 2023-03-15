@@ -20,7 +20,7 @@ const parseCSV = async () => {
     },
   });
 
-  fs.writeFileSync(`src/weapon.json`, JSON.stringify(objectArray));
+  fs.writeFileSync(`weapon.json`, JSON.stringify(objectArray));
 };
 
 parseCSV()
