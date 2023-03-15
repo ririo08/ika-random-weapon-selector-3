@@ -1,5 +1,5 @@
 export interface Weapon {
-  category: string,
-  name: string,
-  filename: string
+  Category: string,
+  Name: string,
+  FileName: string
 }

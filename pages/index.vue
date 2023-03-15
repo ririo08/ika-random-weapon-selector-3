@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Weapon } from '~/@types/Weapon';
-import weapons from '~/src/weapon.json';
+import weapons from '~/weapon.json';
 
 const categories = ref<string[]>([
   'シューター',
@@ -21,9 +21,9 @@ const weaponList = ref<Weapon[]>(weapons);
 const selectedCategories = ref<string[]>(categories.value);
 
 const selectedWeapon = ref<Weapon>({
-  category: '',
-  name: '',
-  filename: '',
+  Category: '',
+  Name: '',
+  FileName: '',
 });
 
 const onbuttonClick = () => {
@@ -34,7 +34,7 @@ const onbuttonClick = () => {
 
 const onCategoryClick = () => {
   weaponList.value = weapons.filter((w) =>
-    selectedCategories.value.includes(w.category)
+    selectedCategories.value.includes(w.Category)
   );
 };
 </script>
@@ -43,11 +43,11 @@ const onCategoryClick = () => {
   <div>
     <h1>ブキセレクター（仮仮）</h1>
     <button @click="onbuttonClick">ランダム生成</button>
-    <div v-if="selectedWeapon.name !== ''" style="border: 1px solid red">
-      <p>カテゴリ：{{ selectedWeapon.category }}</p>
-      <p>ブキ名：{{ selectedWeapon.name }}</p>
-      <p>画像名：{{ selectedWeapon.filename }}</p>
-      <p><img :src="`images/${selectedWeapon.filename}`" alt="" /></p>
+    <div v-if="selectedWeapon.Name !== ''" style="border: 1px solid red">
+      <p>カテゴリ：{{ selectedWeapon.Category }}</p>
+      <p>ブキ名：{{ selectedWeapon.Name }}</p>
+      <p>画像名：{{ selectedWeapon.FileName }}</p>
+      <p><img :src="`images/${selectedWeapon.FileName}`" alt="" /></p>
     </div>
     <div v-for="category in categories" :key="category">
       <input
