@@ -1,0 +1,6 @@
+# Ignore artifacts:
+/dist/
+/src/component/*
+/src/libs/*
+# Ignore all HTML files:
+*.html

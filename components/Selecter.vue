@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { Weapon } from '~/@types/Weapon';
-import weapons from '~/weapon.json';
+import { Weapon } from '~/@types/Weapon'
+import weapons from '~/weapon.json'
 
 interface Props {
-  isStream: boolean;
+  isStream: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), { isStream: false });
+const props = withDefaults(defineProps<Props>(), { isStream: false })
 
 const categories = ref<string[]>([
   'シューター',
@@ -20,39 +20,39 @@ const categories = ref<string[]>([
   'フデ',
   'ストリンガー',
   'ワイパー',
-]);
+])
 
-const weaponList = ref<Weapon[]>(weapons);
+const weaponList = ref<Weapon[]>(weapons)
 
-const selectedCategories = ref<string[]>(categories.value);
+const selectedCategories = ref<string[]>(categories.value)
 
 const selectedWeapon = ref<Weapon>({
   Category: '',
   Name: 'オススメ武器をピックアップ！',
   FileName: 'default.png',
-});
+})
 
 const onbuttonClick = () => {
-  if (weaponList.value.length === 0) return;
-  const landomNumber = Math.floor(Math.random() * weaponList.value.length);
-  selectedWeapon.value = weaponList.value[landomNumber];
-};
+  if (weaponList.value.length === 0) return
+  const landomNumber = Math.floor(Math.random() * weaponList.value.length)
+  selectedWeapon.value = weaponList.value[landomNumber]
+}
 
 const onCategoryClick = () => {
   weaponList.value = weapons.filter((w) =>
     selectedCategories.value.includes(w.Category)
-  );
-};
+  )
+}
 
 const addAllCategory = () => {
-  selectedCategories.value = categories.value;
-  onCategoryClick();
-};
+  selectedCategories.value = categories.value
+  onCategoryClick()
+}
 
 const removeAllCategory = () => {
-  selectedCategories.value = [];
-  onCategoryClick();
-};
+  selectedCategories.value = []
+  onCategoryClick()
+}
 </script>
 
 <template>
