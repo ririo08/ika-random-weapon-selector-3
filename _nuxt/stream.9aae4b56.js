@@ -1,0 +1,1 @@
+import{_ as t}from"./Selecter.450c3983.js";import{a as o,b as r,f as c,o as n}from"./entry.1ee3b26d.js";const s={};function _(a,m){const e=t;return n(),r("div",null,[c(e,{"is-stream":!0})])}const p=o(s,[["render",_]]);export{p as default};
